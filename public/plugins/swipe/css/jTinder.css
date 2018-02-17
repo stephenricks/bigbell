@@ -66,15 +66,13 @@
 #tinderslide li:nth-last-child(1){
     -webkit-transform: translateY(-3px);
     filter: grayscale(0);
-    box-shadow: 0 -10px 5px rgba(0, 0, 0, .4);
+    /*box-shadow: 0 -10px 5px rgba(0, 0, 0, .4);*/
 }
 
 #tinderslide li:nth-last-child(2){
     -webkit-transform: translateY(-6px);
     filter: grayscale(90%);
 }
-
-
 
 
 /*#tinderslide li.pane2 {
