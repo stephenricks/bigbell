@@ -51,7 +51,7 @@ Route::get('/items/{page}', function($id)
 
 	$products = json_decode(file_get_contents(public_path().'/sample-data.json'), true);
 
-	$product_chunks = array_chunk($products, 10);
+	$product_chunks = array_chunk($products, 5);
 
 	if(count($product_chunks) >= $id) {
 		return Response::json($product_chunks[$index]);

@@ -6,14 +6,14 @@ window.sliderOption = {
 	// dislike callback
     onDislike: function (item) {
     	count = $("#tinderslide li").length - 1;
-        if(count < 5 && hasNext && !requesting){
+        if(count < 2 && hasNext && !requesting){
         	getItems(currentPage);
         }
         showProduct();
     },
     onLike: function (item) {
     	count = $("#tinderslide li").length - 1;
-        if(count < 5 && hasNext && !requesting){
+        if(count < 2 && hasNext && !requesting){
         	getItems(currentPage);
         }
         showProduct();
