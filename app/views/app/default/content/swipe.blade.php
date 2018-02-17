@@ -11,8 +11,8 @@
 </div>
 
 <div class="card">
-    <div class="title" data-title>title</div>
-    <div class="supplier" data-supplier>Supplier</div>
-    <div class="price" data-price>price</div>
+    <div class="price" data-price>0</div>
+    <div class="supplier" data-supplier>Smarty Plants</div>
+    <div class="description" data-title>title</div>
 </div>
 @stop
