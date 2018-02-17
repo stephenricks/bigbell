@@ -7,6 +7,11 @@
     @include('app.default.script.script_top')
 </head>
 <body>
+<header>
+	<nav>
+	    <div id="navigation" class="nav nav--primary nav-down">BigBell</div>
+	</nav>
+</header>
     @yield('content-body')
     @include('app.default.script.script_bottom')
 </body>

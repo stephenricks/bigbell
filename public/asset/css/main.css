@@ -68,7 +68,7 @@ html, body {
     -webkit-transform: translateX(0);
     transition: transform .33s cubic-bezier(.17,.67,.44,1.01);
     -webkit-transition: transform .33s cubic-bezier(.17,.67,.44,1.01);
-    margin-top: 73px;
+    margin-top: 30px;
     min-height: 95vh;
 }
 
@@ -97,4 +97,29 @@ sup {
 
 .card .description {
     font-size: .875em;
+}
+
+nav {
+    height: 48px;
+    z-index: 300;
+    top: 0;
+}
+
+.nav {
+    top: 0;
+    z-index: 300;
+    height: 48px;
+    padding: 0 8px;
+    width: 100%;
+    position: fixed;
+    border-bottom: 1px solid #ccc;
+    background: #fff;
+}
+
+#navigation{
+	text-align: center;
+    font-family: "Noto Serif";
+    font-weight: bolder;
+    font-size: 2em;
+    line-height: 1.3em;
 }
