@@ -1,18 +1,17 @@
 @extends('app.default.layout.base')
 @section('content-body')
-<div class="wrap">
-    <div id="tinderslide">
-        <ul>
-            <li>
-                <div class="img"></div>
-            </li>
-        </ul>
+<div class="wrapper">
+    <div class="wrap">
+        <div id="tinderslide" class="loading">
+            <ul>
+            </ul>
+        </div>
     </div>
-</div>
 
-<div class="card">
-    <div class="price" data-price>0</div>
-    <div class="supplier" data-supplier>Smarty Plants</div>
-    <div class="description" data-title>title</div>
+    <div class="card">
+        <div class="price" data-price>0</div>
+        <div class="supplier" data-supplier>Smarty Plants</div>
+        <div class="description" data-title>title</div>
+    </div>
 </div>
 @stop

@@ -1,17 +1,19 @@
 window.currentPage = 1;
 hasNext=true;
+requesting=false;
+slideTemplate = $('<li><div class="img"></div></li>');
 window.sliderOption = {
 	// dislike callback
     onDislike: function (item) {
-    	count = $("#tinderslide li").length;
-        if(count < 3 && hasNext){
+    	count = $("#tinderslide li").length - 1;
+        if(count < 5 && hasNext && !requesting){
         	getItems(currentPage);
         }
         showProduct();
     },
     onLike: function (item) {
-    	count = $("#tinderslide li").length;
-        if(count < 3 && hasNext){
+    	count = $("#tinderslide li").length - 1;
+        if(count < 5 && hasNext && !requesting){
         	getItems(currentPage);
         }
         showProduct();
@@ -27,6 +29,10 @@ window.sliderOption = {
 function swipeRefresh(option){
 	
 	option = option || sliderOption;
+
+	if($("#tinderslide").data('plugin_jTinder')){
+		$("#tinderslide").data('plugin_jTinder').destroy();
+	}
 
 	$("#tinderslide").jTinder(option);
 }
@@ -49,17 +55,19 @@ $('.actions .like, .actions .dislike').click(function(e){
 function getItems(page){
 		
 	page = page || currentPage;
+	requesting = true;
 
 	$.get('/items/'+page, function(data,response){
 
+		console.log(data, response)
 		if(response == 'success'){
 
-			if(response.length < 1) {
+			if(!response.length) {
 				hasNext = false;
 			}
 
 			$.each(data, function(i,d){
-				template = $("#tinderslide li:last").clone();
+				template = slideTemplate.clone();
 				template.find('.img').css({'background-image':'url('+d.image1+')'});
 				template.data(d);
 				$("#tinderslide ul").prepend(template);
@@ -68,6 +76,7 @@ function getItems(page){
 			currentPage++;
 			swipeRefresh();
 			showProduct();
+			requesting = false;
 		}
 
 	});

@@ -83,6 +83,10 @@
             current_pane = panes.length - 1;
         },
 
+        destroy: function(element){
+		    $(element).unbind();
+		},
+
 		handler: function (ev) {
 			ev.preventDefault();
 
