@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'url' => 'http://www.bigbell.ph',
+	'url' => 'https://project-bellbucks.herokuapp.com',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -80,7 +80,7 @@ return array(
 
 	'key' => 'YourSecretKey!!!',
 
-	'cipher' => MCRYPT_RIJNDAEL_128,
+	'cipher' => 'AES-256-CBC',
 
 	/*
 	|--------------------------------------------------------------------------
