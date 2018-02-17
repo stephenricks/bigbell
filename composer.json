@@ -5,9 +5,7 @@
 	"license": "MIT",
 	"type": "project",
 	"require": {
-		"laravel/framework": "4.2.*",
-		"php": "^5.6.32",
-		"ext-mcrypt": "^7.0@RC"	
+		"laravel/framework": "4.2.*"
 	},
 	"autoload": {
 		"classmap": [
