@@ -71,3 +71,19 @@ html, body {
     margin-top: 73px;
     min-height: 95vh;
 }
+
+.card{
+	padding: 0 20px;
+}
+
+.card .price {
+	float: right;
+    padding-left: 20px;
+    border-left: 2px solid #ccc;
+    height: inherit;
+}
+
+.card .title {
+	font-size: 20px;
+    padding-bottom: 20px;
+}

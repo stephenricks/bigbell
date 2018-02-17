@@ -60,6 +60,7 @@
     -webkit-transition: transform .33s cubic-bezier(.17,.67,.44,1.01);
     -webkit-transform: translateY(-9px);
     filter: grayscale(100%);
+    background: #fff;
 }
 
 #tinderslide li:nth-last-child(1){

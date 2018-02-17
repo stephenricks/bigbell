@@ -10,8 +10,8 @@
 
     <div class="card">
         <div class="price" data-price>0</div>
-        <div class="supplier" data-supplier>Smarty Plants</div>
-        <div class="description" data-title>title</div>
+        <div class="title" data-title>title</div>
+        <div class="description" data-description>Smarty Plants</div>
     </div>
 </div>
 @stop

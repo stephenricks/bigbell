@@ -40,8 +40,8 @@ function swipeRefresh(option){
 function showProduct(){
 	product = $("#tinderslide li:last").data();
 	$('.card .price').text(product.end_price);
-	//$('.card .supplier').text();
-	$('.card .description').text(product.name);
+	//$('.card .description').text();
+	$('.card .title').text(product.name);
 }
 
 /**
