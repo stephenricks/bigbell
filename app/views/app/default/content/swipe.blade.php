@@ -9,9 +9,9 @@
     </div>
 
     <div class="card">
-        <div class="price" data-price>0</div>
-        <div class="title" data-title>title</div>
-        <div class="description" data-description>Smarty Plants</div>
+        <div class="price" data-price>-</div>
+        <div class="title" data-title>-</div>
+        <div class="description" data-description>-</div>
     </div>
 </div>
 @stop

@@ -39,7 +39,8 @@ function swipeRefresh(option){
 
 function showProduct(){
 	product = $("#tinderslide li:last").data();
-	$('.card .price').text(product.end_price);
+	currency = '<sup>PHP</sup>';
+	$('.card .price').html(product.end_price+currency);
 	//$('.card .description').text();
 	$('.card .title').text(product.name);
 }
