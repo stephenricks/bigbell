@@ -1,18 +1,20 @@
+window.currentPage = 1;
+hasNext=true;
 window.sliderOption = {
 	// dislike callback
     onDislike: function (item) {
-	    // set the status text
-        //$('#status').html('Dislike image ' + (item.index()+1));
-        $(item).remove();
+    	count = $("#tinderslide li").length;
+        if(count < 3 && hasNext){
+        	getItems(currentPage);
+        }
         showProduct();
     },
-	// like callback
     onLike: function (item) {
-	    // set the status text
-        //$('#status').html('Like image ' + (item.index()+1));
-        $(item).remove();
+    	count = $("#tinderslide li").length;
+        if(count < 3 && hasNext){
+        	getItems(currentPage);
+        }
         showProduct();
-        console.log(item);
     },
 	animationRevertSpeed: 200,
 	animationSpeed: 400,
@@ -20,6 +22,7 @@ window.sliderOption = {
 	likeSelector: '.like',
 	dislikeSelector: '.dislike'
 };
+
 
 function swipeRefresh(option){
 	
@@ -30,7 +33,6 @@ function swipeRefresh(option){
 
 function showProduct(){
 	product = $("#tinderslide li:last").data();
-	console.log(product);
 	$('.card .price').text(product.end_price);
 	//$('.card .supplier').text();
 	$('.card .description').text(product.name);
@@ -44,19 +46,32 @@ $('.actions .like, .actions .dislike').click(function(e){
 	swipeRefresh($(this).attr('class'));
 });
 
-$.get('sample-data.json', function(data,response){
+function getItems(page){
+		
+	page = page || currentPage;
 
-	if(response == 'success'){
+	$.get('/items/'+page, function(data,response){
 
-		$.each(data, function(i,d){
-			template = $("#tinderslide li:last").clone();
-			template.find('.img').css({'background-image':'url('+d.image1+')'});
-			template.data(d);
-			$("#tinderslide ul").append(template);
-		});
+		if(response == 'success'){
 
-		swipeRefresh();
-		showProduct();
-	}
+			if(response.length < 1) {
+				hasNext = false;
+			}
 
-});
+			$.each(data, function(i,d){
+				template = $("#tinderslide li:last").clone();
+				template.find('.img').css({'background-image':'url('+d.image1+')'});
+				template.data(d);
+				$("#tinderslide ul").prepend(template);
+			});
+
+			currentPage++;
+			swipeRefresh();
+			showProduct();
+		}
+
+	});
+}
+
+
+getItems(1);
