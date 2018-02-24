@@ -16,6 +16,12 @@ Route::get('/', function()
 	return Redirect::to('/select');
 });
 
+Route::get('/login/fb-auth', function()
+{
+	dd($_POST);
+});
+
+
 Route::get('select', function()
 {
 	return View::make('app.default.content.swipe');
