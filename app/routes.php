@@ -13,6 +13,9 @@
 
 Route::get('/', function()
 {
+
+	return Response::json(Product::with(['supplier','category'])->get());
+
 	return Redirect::to('/select');
 });
 
