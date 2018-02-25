@@ -13,9 +13,6 @@
 
 Route::get('/', function()
 {
-
-	return Response::json(Product::with(['supplier','category'])->get());
-
 	return Redirect::to('/select');
 });
 
@@ -66,4 +63,18 @@ Route::get('/items/{page}', function($id)
 		return Response::json($product_chunks[$index]);
 	}
 
+});
+
+Route::group(['prefix' => 'api'], function(){
+
+	Route::group(['prefix' => 'v1'], function(){
+
+		//get product
+		Route::get('category/{categoryID}/product', 'APIController@products');
+
+		//record swiping actions
+
+		Route::post('swipe-action', 'APIController@swipeAction');
+
+	});
 });

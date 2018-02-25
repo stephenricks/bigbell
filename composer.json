@@ -6,7 +6,8 @@
 	"type": "project",
 	"require": {
 		"laravel/framework": "4.2.*",
-		"ext-mcrypt": "^7.0@RC"
+		"ext-mcrypt": "^7.0@RC",
+		"vlucas/phpdotenv": "^2.4"
 	},
 	"autoload": {
 		"classmap": [
