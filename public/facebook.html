@@ -8,19 +8,27 @@
   function checkLoginState() {
     FB.getLoginStatus(function(response) {
       console.log(response);
-      $.post('login/fb-auth', {response:response}, function(resver){console.log(resver)});
+      $.post('fb/login', {response:response}, function(resver){
+
+          if(resver.redirectUrl){
+            location = resver.redirectUrl;
+          }
+
+      });
+
     });
+  }
 
   window.fbAsyncInit = function() {
-  FB.init({
-    appId      : '1773157099655952',
-    cookie     : true,
-    xfbml      : true,
-    version    : 'v2.12'  
-  });
-    
-  FB.AppEvents.logPageView();   
-    
+    FB.init({
+      appId      : '1376911972414508',
+      cookie     : true,
+      xfbml      : true,
+      version    : 'v2.12'  
+    });
+      
+    FB.AppEvents.logPageView();   
+
   };
 
   (function(d, s, id) {

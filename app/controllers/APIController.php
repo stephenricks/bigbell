@@ -20,10 +20,61 @@ class APIController extends BaseController {
 	public function products($categoryId)
 	{
 
+		$userId = Auth::user()->id;
+		
+		$records = 	DB::table('swipe_action')->select('product_id')->where('user_id', $userId)->get();
+		$product_id = array_fetch($records, 'product_id');
 
 		$products = Product::whereCategoryId($categoryId)->first();
 
 		return Response::json($products);
 	}
 
+	public function swipeAction() {
+
+	}
+
+	public function login(){
+
+		$fb = new \Facebook\Facebook([
+			'app_id' => getenv('FB_APPID'),
+			'app_secret' => getenv('FB_SECRET'),
+			'default_graph_version' => 'v2.10',
+		]);
+
+		$redirectHelper = $fb->getJavascriptHelper();
+		
+		$accessToken = $redirectHelper->getAccessToken();
+		
+		$user = $fb->get("/me?fields=first_name,last_name,birthday,email,picture", $accessToken);
+
+		$userDetails = $user->getDecodedBody();
+		extract($userDetails);
+
+		$photo = array_get($userDetails, 'picture.data.url');
+		$fb_id = $id;
+		$fb_access_token = $accessToken->getValue();
+
+		$userData = compact("first_name", "last_name", "email", "photo", "fb_access_token", "fb_id");
+
+		//this is to check if email will be a required field., subject for permission re-request
+/*		if(!isset($email)){
+			echo 'email not found'; exit;
+		}
+*/
+		//assuming that user has permitted email;
+
+		$user = User::firstOrNew(compact("email"));
+
+		if(!$user->exists) {
+			$user = User::create($userData);
+		}
+
+		Auth::loginUsingId($user->id);
+		Session::put('facebook-access-token', $fb_access_token);
+
+		return Response::json(['redirectUrl' => url('/select')]);
+	}
+
 }
+

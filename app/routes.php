@@ -22,6 +22,13 @@ Route::post('/login/fb-auth', function()
 });
 
 
+
+Route::group(['prefix' => 'fb'], function(){
+
+	Route::post('/login', 'APIController@login');
+});
+
+
 Route::get('select', function()
 {
 	return View::make('app.default.content.swipe');
@@ -65,7 +72,7 @@ Route::get('/items/{page}', function($id)
 
 });
 
-Route::group(['prefix' => 'api'], function(){
+Route::group(['prefix' => 'api', 'before' => 'auth'], function(){
 
 	Route::group(['prefix' => 'v1'], function(){
 
