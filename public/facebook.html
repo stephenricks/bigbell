@@ -6,7 +6,7 @@
 
   function checkLoginState() {
     FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
+      $.post('login/fb-auth', response, function(resver){console.log(resver)});
     });
   }
 
