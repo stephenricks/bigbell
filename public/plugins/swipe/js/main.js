@@ -42,6 +42,21 @@ window.sliderOption = {
 	dislikeSelector: '.dislike'
 };
 
+ function checkLoginState() {
+    FB.getLoginStatus(function(response) {
+      console.log(response);
+      $.post('fb/login', {response:response}, function(resver){
+
+          if(resver.redirectUrl){
+            location = resver.redirectUrl;
+          }
+
+      });
+
+    });
+  }
+
+
 
 function swipeRefresh(option){
 	
@@ -103,6 +118,10 @@ function getItems(page){
 				template.find('.img').css({'background-image':'url('+d.image+')'});
 				template.data(d);
 				$("#tinderslide ul").prepend(template);
+
+				image = new Image();
+				image.src = d.image;
+
 			});
 
 			swipeRefresh();
