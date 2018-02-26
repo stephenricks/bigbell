@@ -16,18 +16,6 @@ Route::get('/', function()
 	return Redirect::to('/select');
 });
 
-Route::post('/login/fb-auth', function()
-{
-	dd($_POST);
-});
-
-
-
-Route::group(['prefix' => 'fb'], function(){
-
-	Route::post('/login', 'APIController@login');
-});
-
 
 Route::get('select', function()
 {
@@ -84,4 +72,9 @@ Route::group(['prefix' => 'api', 'before' => 'auth'], function(){
 		Route::post('swipe-action', 'APIController@swipeAction');
 
 	});
+});
+
+Route::group(['prefix' => 'fb'], function(){
+
+	Route::post('/login', 'APIController@login');
 });

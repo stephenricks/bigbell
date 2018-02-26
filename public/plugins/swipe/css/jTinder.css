@@ -2,6 +2,8 @@
 .wrap  {
     height: 50%;
     padding: 5%;
+    text-align: center;
+    line-height: 50vh;
 }
 
 #tinderslide {

@@ -23,14 +23,38 @@ class APIController extends BaseController {
 		$userId = Auth::user()->id;
 		
 		$records = 	DB::table('swipe_action')->select('product_id')->where('user_id', $userId)->get();
-		$product_id = array_fetch($records, 'product_id');
+		$product_ids = array_fetch($records, 'product_id');
 
-		$products = Product::whereCategoryId($categoryId)->first();
+		$products = Product::whereCategoryId($categoryId);
+
+		if($product_ids){
+			$products = $products->whereNotIn('id', $product_ids);
+		} 
+
+		$products = $products->orderByRaw('RAND()')->take(5)->get();
 
 		return Response::json($products);
 	}
 
 	public function swipeAction() {
+
+		$user_id = Session::get('user_id');
+		$product_id = Input::get('id');
+		$action = Input::get('action');
+
+		try{
+			$record = DB::table('swipe_action')->where(compact('user_id', 'product_id'))->first();
+
+			if ($record) {
+				DB::table('swipe_action')->where('id', $record->id)->update(compact('action'));
+			} else {
+				DB::table('swipe_action')->insert(compact('user_id', 'product_id', 'action'));
+			}
+		} catch (Exception $e) {
+			return Response::json(['meta'=>['error' => 'true', 'message' => $e->getMessage()]]);
+		}
+
+		return Response::json(['meta'=>['success' => 'true']]);
 
 	}
 
@@ -72,8 +96,18 @@ class APIController extends BaseController {
 
 		Auth::loginUsingId($user->id);
 		Session::put('facebook-access-token', $fb_access_token);
+		Session::put('user_id', $user->id);
 
 		return Response::json(['redirectUrl' => url('/select')]);
+
+	}
+
+	public function logout(){
+		Auth::logout();
+		Session::flush();
+
+		return Redirect::to('/');
+
 	}
 
 }
