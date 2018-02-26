@@ -22,7 +22,7 @@
   function checkLoginState() {
     FB.getLoginStatus(function(response) {
       console.log(response);
-      ajax('login/fb-auth', response, 'POST', function(resver){console.log(resver)});
+      ajax('login/fb-auth', {response:response}, 'POST', function(resver){console.log(resver)});
     });
   }
 
