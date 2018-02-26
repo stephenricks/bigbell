@@ -4,9 +4,24 @@
   <title>FB Login</title>
   <script>
 
+    var ajax = function(u,d,t,c) {
+      var x;
+
+      x = new XMLHttpRequest();
+      x.onreadystatechange = function() {
+          if (x.readyState == 4 && x.status == 200) {
+            c.call(this, x.responseText);
+          }
+      };
+      x.open(t, u, true);
+      x.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      x.send(d);
+  };
+
+
   function checkLoginState() {
     FB.getLoginStatus(function(response) {
-      $.post('login/fb-auth', response, function(resver){console.log(resver)});
+      ajax('login/fb-auth', response, 'POST', function(resver){console.log(resver)});
     });
   }
 
