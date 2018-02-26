@@ -16,7 +16,7 @@ Route::get('/', function()
 	return Redirect::to('/select');
 });
 
-Route::get('/login/fb-auth', function()
+Route::post('/login/fb-auth', function()
 {
 	dd($_POST);
 });
