@@ -33,13 +33,6 @@ Route::get('/favorite', function()
 	return View::make('hello');
 });
 
-Route::get('/product/{id}', function($id)
-{
-
-	dd($id);
-
-	return View::make('hello');
-});
 
 Route::get('/items/{page}', function($id)
 {
