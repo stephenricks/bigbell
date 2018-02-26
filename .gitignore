@@ -9,3 +9,5 @@ Thumbs.db
 kasmot.pem
 kasmot.pub
 .env
+/public/phpmyadmin
+
