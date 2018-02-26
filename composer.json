@@ -7,7 +7,8 @@
 	"require": {
 		"laravel/framework": "4.2.*",
 		"ext-mcrypt": "^7.0@RC",
-		"vlucas/phpdotenv": "^2.4"
+		"vlucas/phpdotenv": "^2.4",
+		"facebook/graph-sdk": "^5.6"
 	},
 	"autoload": {
 		"classmap": [

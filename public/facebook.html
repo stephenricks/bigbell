@@ -10,7 +10,6 @@
       console.log(response);
       $.post('login/fb-auth', {response:response}, function(resver){console.log(resver)});
     });
-  }
 
   window.fbAsyncInit = function() {
   FB.init({
