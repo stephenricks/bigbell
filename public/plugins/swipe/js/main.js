@@ -1,11 +1,12 @@
 window.currentPage = 1;
-categoryId = 2;
+categoryId = 1;
 hasNext=true;
 requesting=false;
 slideTemplate = $('<li><div class="img"></div></li>');
 window.sliderOption = {
 	// dislike callback
     onDislike: function (item) {
+    	checkLogin();
     	count = $("#tinderslide li").length - 1;
         if(count < 4 && hasNext && !requesting){
         	getItems(currentPage);
@@ -21,6 +22,7 @@ window.sliderOption = {
 		});  
     },
     onLike: function (item) {
+    	checkLogin();
     	count = $("#tinderslide li").length - 1;
         if(count < 4 && hasNext && !requesting){
         	getItems(currentPage);
@@ -42,20 +44,15 @@ window.sliderOption = {
 	dislikeSelector: '.dislike'
 };
 
- function checkLoginState() {
-    FB.getLoginStatus(function(response) {
-      console.log(response);
-      $.post('fb/login', {response:response}, function(resver){
 
-          if(resver.redirectUrl){
-            location = resver.redirectUrl;
-          }
+function checkLogin(){
+	if(!isLogged){
+		alert("Please login first. \nYou will be redirected to login page");
 
-      });
-
-    });
-  }
-
+		location = '/fb/login';
+		return;
+	}
+}
 
 
 function swipeRefresh(option){

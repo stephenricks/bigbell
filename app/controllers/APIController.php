@@ -20,7 +20,7 @@ class APIController extends BaseController {
 	public function products($categoryId)
 	{
 
-		$userId = Auth::user()->id;
+		$userId = Session::get('user_id', 0);
 		
 		$records = 	DB::table('swipe_action')->select('product_id')->where('user_id', $userId)->get();
 		$product_ids = array_fetch($records, 'product_id');

@@ -32,7 +32,7 @@ Route::get('/favorite', function()
 {
 	return View::make('hello');
 });
-
+	
 
 Route::get('/items/{page}', function($id)
 {
@@ -53,7 +53,7 @@ Route::get('/items/{page}', function($id)
 
 });
 
-Route::group(['prefix' => 'api', 'before' => 'auth'], function(){
+Route::group(['prefix' => 'api'], function(){
 
 	Route::group(['prefix' => 'v1'], function(){
 
@@ -62,7 +62,7 @@ Route::group(['prefix' => 'api', 'before' => 'auth'], function(){
 
 		//record swiping actions
 
-		Route::post('swipe-action', 'APIController@swipeAction');
+		Route::post('swipe-action', ['before' => 'auth', 'uses' => 'APIController@swipeAction']);
 
 	});
 });
@@ -70,4 +70,7 @@ Route::group(['prefix' => 'api', 'before' => 'auth'], function(){
 Route::group(['prefix' => 'fb'], function(){
 
 	Route::post('/login', 'APIController@login');
+	Route::get('/login', function(){
+		return Response::view('app.default.content.login-fb');
+	});
 });
