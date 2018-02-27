@@ -39,12 +39,20 @@
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
 </script>
+<style>
+  #login{
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 20vh;
+  }
+</style>
 @stop
 
 @section('content-body')
 <div id="fb-root"></div>
 
-<div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" data-scope="public_profile,email" onlogin="checkLoginState();"></div>
+<div id="login" class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" data-scope="public_profile,email" onlogin="checkLoginState();"></div>
 @stop
 
 
