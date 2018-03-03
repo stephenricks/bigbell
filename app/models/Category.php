@@ -19,7 +19,7 @@ class Category extends Eloquent {
 
 
 	public function products() {
-		return $this->hasMany('Product', 'supplier_id');
+		return $this->hasMany('Product', 'category_id');
 	}
 
 }

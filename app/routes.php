@@ -13,6 +13,34 @@
 
 Route::get('/', function()
 {
+
+/*	$categories = 
+	Category::with(['products' => function($q){
+		return $q->whereHas('userliked', function($qq){
+			return $qq->where('users.id', 1);
+		})->limit(5);
+	}])->whereHas('products.userliked', function($q){
+		$q->where('users.id', 1);
+	})->get();
+
+
+	$categories = Category::whereHas('products.userliked', function($q){
+		$q->where('users.id', 1);
+	})->get();
+
+	foreach($categories as $category) {
+		$product = $category->load(['products' => function($q){
+			return $q->whereHas('userliked', function($qq){
+				return $qq->where('users.id', 1)->orderBy('swipe_action.created_at','DESC');
+			})->limit(5);
+		}]);
+
+		$products[$category->id] = $product;
+	}
+
+	return Response::json($categories);
+
+	exit;*/
 	return Redirect::to('/select');
 });
 
@@ -28,9 +56,9 @@ Route::get('/category', function()
 	return View::make('hello');
 });
 
-Route::get('/favorite', function()
+Route::get('/favorites', function()
 {
-	return View::make('hello');
+	return View::make('app.default.content.favorites');
 });
 	
 
@@ -58,11 +86,14 @@ Route::group(['prefix' => 'api'], function(){
 	Route::group(['prefix' => 'v1'], function(){
 
 		//get product
-		Route::get('category/{categoryID}/product', 'APIController@products');
+		Route::get('/category/{categoryID}/product', 'APIController@products');
+		Route::get('/category/favorite', 'APIController@productCategories');
+		//Route::get('/user/category/{categoryID}/product', ['before' => 'auth', 'uses' => 'APIController@favoriteProducts']);
+
 
 		//record swiping actions
 
-		Route::post('swipe-action', ['before' => 'auth', 'uses' => 'APIController@swipeAction']);
+		Route::post('/swipe-action', ['before' => 'auth', 'uses' => 'APIController@swipeAction']);
 
 	});
 });

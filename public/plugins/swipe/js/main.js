@@ -1,5 +1,5 @@
 window.currentPage = 1;
-categoryId = 1;
+categoryId = 2;
 hasNext=true;
 requesting=false;
 slideTemplate = $('<li><div class="img"></div></li>');

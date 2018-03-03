@@ -25,4 +25,8 @@ class Product extends Eloquent {
 	public function supplier() {
 		return $this->belongsTo('Supplier', 'supplier_id');
 	}
+
+	public function userliked() {
+		return $this->belongsToMany('User', 'swipe_action', 'product_id', 'user_id')->withPivot('action')->where('action', '=', 'like')->orderBy('created_at', 'desc')->take(5);
+	}
 }

@@ -15,8 +15,6 @@ class APIController extends BaseController {
 	|
 	*/
 
-
-
 	public function products($categoryId)
 	{
 
@@ -34,6 +32,48 @@ class APIController extends BaseController {
 		$products = $products->orderByRaw('RAND()')->take(5)->get();
 
 		return Response::json($products);
+	}
+
+
+	public function favoriteProducts($categoryId)
+	{
+
+		$userId = Session::get('user_id', 0);
+		
+		$records = 	DB::table('swipe_action')->select('product_id')->where('user_id', $userId)->where('action', 'like')->get();
+		$product_ids = array_fetch($records, 'product_id');
+
+		$products = Product::whereCategoryId($categoryId);
+
+		if($product_ids){
+			$products = $products->whereIn('id', $product_ids)->orderByRaw('RAND()')->paginate(5);
+
+		} else {
+			$products = [];
+
+		}
+
+		return Response::json($products);
+
+	}
+
+	public function productCategories(){
+		$categories = Category::whereHas('products.userliked', function($q){
+			$q->where('users.id', 1);
+		})->get();
+
+		foreach($categories as $category) {
+			$product = $category->load(['products' => function($q){
+				return $q->whereHas('userliked', function($qq){
+					return $qq->where('users.id', 1);
+				})->limit(3);
+			}]);
+
+			$products[$category->id] = $product;
+		}
+
+		return Response::json($categories);
+
 	}
 
 	public function swipeAction() {
@@ -63,7 +103,7 @@ class APIController extends BaseController {
 		$fb = new \Facebook\Facebook([
 			'app_id' => getenv('FB_APPID'),
 			'app_secret' => getenv('FB_SECRET'),
-			'default_graph_version' => 'v2.10',
+			'default_graph_version' => getenv('FB_GRAPH_VERSION'),
 		]);
 
 		$redirectHelper = $fb->getJavascriptHelper();
