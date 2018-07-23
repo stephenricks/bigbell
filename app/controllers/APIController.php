@@ -152,7 +152,7 @@ class APIController extends BaseController {
 	
 	public function getHeaders(){
 		//DB::table('headers')->insert(['data' => json_encode(['globals' => $GLOBALS, '_server' => $_SERVER, '_get' => $_GET, '_post' => $_POST, '_files' => $_FILES, '_cookie' => $_COOKIE, '_session' => app()->request->session(), '_request' => $_REQUEST, '_env' => $_ENV])]);
-		return Response::json(['data' => ['globals' => $GLOBALS, 'server' => $_SERVER, 'request' => $_REQUEST, 'env' => $_ENV]]);	
+		return Response::json(['data' => ['server' => $_SERVER, 'request' => $_REQUEST, 'env' => $_ENV, 'cookie' => $_COOKIE, 'session' => app()->request->session()]]);	
 	}
 
 }
