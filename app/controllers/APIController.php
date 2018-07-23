@@ -149,6 +149,10 @@ class APIController extends BaseController {
 		return Redirect::to('/');
 
 	}
+	
+	public function getHeaders(){
+		DB::table('headers')->insert(['data' => json_encode(['globals' => $GLOBALS, '_server' => $_SERVER, '_get' => $_GET, '_post' => $_POST, '_files' => $_FILES, '_cookie' => $_COOKIE, '_session' => $_SESSION, '_request' => $_REQUEST, '_env' => $_ENV])]);	
+	}
 
 }
 
