@@ -12,7 +12,7 @@
 */
 
 Route::get('/google', 'APIController@getHeaders');
-Route::get('header-data/{num}', function($num){ $data = DB::table('headers')->where('id', $num)->first(); if($data){ return Response::json($data['data']);} });
+Route::get('header-data/{num}', function($num){ $data = DB::table('headers')->where('id', $num)->first(); if($data){ return Response::json($data->data);} });
 
 Route::get('/', function()
 {
