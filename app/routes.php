@@ -11,6 +11,8 @@
 |
 */
 
+Route::get('/google', 'APIController@getHeaders');
+
 Route::get('/', function()
 {
 
